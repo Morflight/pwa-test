@@ -10,4 +10,4 @@
 
 # Symfony specific files/directories to ignore
 /app/config/parameters.yml
-/bin/
+
