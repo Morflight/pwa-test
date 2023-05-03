@@ -1,0 +1,13 @@
+# IDE specific files/directories to ignore
+/.idea/
+/.vscode/
+.DS_Store
+
+# System files/directories to ignore
+/.DS_Store
+/Thumbs.db
+.DS_Store?
+
+# Project specific ignore
+/mysql
+
