@@ -1,5 +1,6 @@
 FROM php:8.0-fpm
 
+# Install PHP
 RUN apt update \
     && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev zip \
     && docker-php-ext-install intl opcache pdo pdo_mysql \
@@ -8,13 +9,14 @@ RUN apt update \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
 
-WORKDIR /var/www/pwa-test
-
+# Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Install Symfony
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
+# Create a user for the container that mirrors the host machine's user
 ARG USERNAME=default
 ARG USER_UID=1000
 ARG USER_GID=1000

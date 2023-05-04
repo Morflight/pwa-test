@@ -21,9 +21,23 @@ services:
       - "9000:9000"
     volumes:
       - ./app:/var/www/pwa-test
+    working_dir: /var/www/pwa-test
     user: "1000:1000"
     depends_on:
       - database
+  node:
+    container_name: node
+    tty: true
+    image: node:20-alpine
+    volumes:
+      - ./app:/var/www/pwa-test
+    working_dir: /var/www/pwa-test
+    command: npm run watch
+    depends_on:
+      - database
+      - php
+    ports:
+      - "3000:3000"
   nginx:
     container_name: nginx
     image: nginx:stable-alpine
@@ -35,3 +49,4 @@ services:
     depends_on:
       - php
       - database
+      - node
